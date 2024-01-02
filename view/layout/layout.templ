@@ -1,7 +1,18 @@
 package layout
 
+templ Header() {
+	<div class="w-full p-2 flex justify-center items-center bg-black">
+		<h1 class="font-semibold text-cyan-600">This is from the Base layout (Header)</h1>
+	</div>
+}
+
+templ Footer() {
+	<div class="w-full p-2 flex justify-center items-center bg-black absolute bottom-0">
+		<h1 class="font-semibold text-cyan-600">This is from the Base layout (Footer)</h1>
+	</div>
+}
+
 templ Base() {
-	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
@@ -10,8 +21,9 @@ templ Base() {
 			<title>Golang Templ</title>
 		</head>
 		<body>
-			<h1 class="font-semibold text-cyan-600">This is from the Base layout</h1>
+			@Header()
 			{ children... }
+			@Footer()
 		</body>
 	</html>
 }
