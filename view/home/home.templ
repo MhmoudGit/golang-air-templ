@@ -1,0 +1,9 @@
+package home
+
+import "dashboard/view/layout"
+
+templ Hello(name string) {
+	@layout.Base() {
+		<div>Hello, { name }</div>
+	}
+}
