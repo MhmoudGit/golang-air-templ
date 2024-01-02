@@ -5,7 +5,7 @@ tmp_dir = "tmp"
 [build]
 args_bin = []
 bin = "tmp\\main.exe"
-cmd = ".\\tailwind -i ./static/css/input.css -o ./static/css/output.css && make gen && make run"
+cmd = "make gen && .\\tailwind -i ./static/css/input.css -o ./static/css/output.css && make run"
 delay = 0
 exclude_dir = ["assets", "tmp", "vendor", "testdata"]
 exclude_file = []
@@ -18,13 +18,12 @@ include_ext = ["go", "tpl", "tmpl", "templ", "html"]
 include_file = []
 kill_delay = "0s"
 log = "build-errors.log"
-poll = true
+poll = false
 poll_interval = 0
 rerun = false
 rerun_delay = 500
 send_interrupt = false
 stop_on_error = true
-port = 3000
 
 [color]
 app = ""
