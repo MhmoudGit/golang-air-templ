@@ -4,16 +4,28 @@ import (
 	"dashboard/view/home"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	app := echo.New()
-	app.Static("/static", "static")
+	// Creating new instance of echo
+	e := echo.New()
 
-	app.GET("/", homeHandler)
-	app.Start("localhost:3000")
+	// Middlewares
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	// Serving static files (css, html, images)
+	e.Static("/static", "static")
+
+	// Routes
+	e.GET("/", homeHandler)
+
+	// Starting echo server
+	e.Start("localhost:3000")
 }
 
+// Home Page Handler
 func homeHandler(c echo.Context) error {
 	component := home.Hello("Mahmoud")
 	return component.Render(c.Request().Context(), c.Response())
