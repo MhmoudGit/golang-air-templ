@@ -14,3 +14,9 @@
 #### Notes
 
 - Hot reloading doesn't reload the browser page.
+
+- To do
+  -
+  - Add HTMX
+  - Create reusable UI Components
+  - Create a layout
