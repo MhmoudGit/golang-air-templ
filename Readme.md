@@ -16,7 +16,7 @@
 - Hot reloading doesn't reload the browser page.
 
 - To do
-  -
-  - Add HTMX
-  - Create reusable UI Components
+  - 2 Separate states for 2 users &#x2713;
+  - Add HTMX &#x2713;
+  - Create reusable UI Components &#x2713;
   - Create a layout
