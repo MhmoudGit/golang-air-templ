@@ -18,7 +18,13 @@ type Buttons struct {
 	Theme       string
 }
 
-func Hello(name string, state string, details []Buttons) templ.Component {
+type User struct {
+	Id    int
+	Name  string `form:"name"`
+	State string `form:"state"`
+}
+
+func Hello(users []User, details []Buttons) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -37,7 +43,17 @@ func Hello(name string, state string, details []Buttons) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			templ_7745c5c3_Err = Card(name, state, details).Render(ctx, templ_7745c5c3_Buffer)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col md:flex-row justify-center items-center gap-2 h-full\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			for _, u := range users {
+				templ_7745c5c3_Err = Card(u.Name, u.State, details).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -57,7 +73,7 @@ func Hello(name string, state string, details []Buttons) templ.Component {
 	})
 }
 
-func StateForm(details []Buttons) templ.Component {
+func StateForm(name string, details []Buttons) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -75,7 +91,7 @@ func StateForm(details []Buttons) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		for _, d := range details {
-			templ_7745c5c3_Err = button.Button(d.Placeholder, d.Theme).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = button.Button(name, d.Placeholder, d.Theme).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -125,7 +141,7 @@ func Card(name string, state string, details []Buttons) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\view\home\home.templ`, Line: 45, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\view\home\home.templ`, Line: 55, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -143,7 +159,7 @@ func Card(name string, state string, details []Buttons) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(state)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\view\home\home.templ`, Line: 48, Col: 19}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\view\home\home.templ`, Line: 58, Col: 19}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
@@ -153,7 +169,7 @@ func Card(name string, state string, details []Buttons) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = StateForm(details).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = StateForm(name, details).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

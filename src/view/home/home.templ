@@ -8,13 +8,23 @@ type Buttons struct {
 	Theme       string
 }
 
-templ Hello(name string, state string, details []Buttons) {
+type User struct {
+	Id    int
+	Name  string `form:"name"`
+	State string `form:"state"`
+}
+
+templ Hello(users []User, details []Buttons) {
 	@layout.Base() {
-		@Card(name, state, details)
+		<div class="flex flex-col md:flex-row justify-center items-center gap-2 h-full">
+			for _, u := range users {
+				@Card(u.Name, u.State, details)
+			}
+		</div>
 	}
 }
 
-templ StateForm(details []Buttons) {
+templ StateForm(name string, details []Buttons) {
 	<form
 		id="myForm"
 		hx-post="/state"
@@ -24,7 +34,7 @@ templ StateForm(details []Buttons) {
 	>
 		<div class="flex justify-center items-center gap-4">
 			for _, d := range details {
-				@button.Button(d.Placeholder, d.Theme)
+				@button.Button(name, d.Placeholder, d.Theme)
 			}
 		</div>
 	</form>
@@ -49,6 +59,6 @@ templ Card(name string, state string, details []Buttons) {
 				Status: { state }
 			</p>
 		</div>
-		@StateForm(details)
+		@StateForm(name, details)
 	</div>
 }

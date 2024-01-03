@@ -56,7 +56,7 @@ func Footer() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full p-2 flex justify-center items-center bg-black absolute bottom-0\"><h1 class=\"font-semibold text-cyan-600\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full p-2 flex justify-center items-center bg-black\"><h1 class=\"font-semibold text-cyan-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
