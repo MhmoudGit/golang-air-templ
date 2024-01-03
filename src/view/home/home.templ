@@ -1,0 +1,54 @@
+package home
+
+import "dashboard/src/view/layout"
+import "dashboard/src/components/button"
+
+type Buttons struct {
+	Placeholder string
+	Theme       string
+}
+
+templ Hello(name string, state string, details []Buttons) {
+	@layout.Base() {
+		@Card(name, state, details)
+	}
+}
+
+templ StateForm(details []Buttons) {
+	<form
+		id="myForm"
+		hx-post="/state"
+		target="#card"
+		hx-trigger="submit"
+		hx-swap="outerHTML"
+	>
+		<div class="flex justify-center items-center gap-4">
+			for _, d := range details {
+				@button.Button(d.Placeholder, d.Theme)
+			}
+		</div>
+	</form>
+}
+
+templ Card(name string, state string, details []Buttons) {
+	<div
+		id="card"
+		hx-target="this"
+		hx-swap="outerHTML"
+		hx-indicator="#indicator"
+		class="text-xl font-semibold p-2 flex flex-col justify-start items-start gap-4 border m-4 w-fit rounded-md"
+	>
+		<div class="relative w-full">
+			<p id="indicator" class="htmx-indicator absolute w-full h-full flex justify-center items-center bg-white backdrop-blur-lg">
+				Loading...
+			</p>
+			<p>
+				Hello, { name }
+			</p>
+			<p>
+				Status: { state }
+			</p>
+		</div>
+		@StateForm(details)
+	</div>
+}
