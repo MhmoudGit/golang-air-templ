@@ -15,7 +15,7 @@ type User struct {
 }
 
 templ UsersView(users []User, details []Buttons) {
-	@layout.Base() {
+	@layout.Base("/users") {
 		<div>
 			@UsersData(users, details)
 		</div>

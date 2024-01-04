@@ -11,23 +11,43 @@ var navList []NavItem = []NavItem{
 	{name: "Users", path: "/users", icon: "gg-user-list"},
 }
 
-templ Nav() {
-	<nav class="col-span-2 left-0 top-0 sticky p-2 bg-black text-white z-50 flex flex-col gap-4 font-semibold">
-		<h1 class="w-full text-center p-4 text-2xl">Logo / Title</h1>
-		<ul class="w-full flex flex-col justify-start items-start gap-3 p-4">
+templ Nav(v string) {
+	<nav class="w-fit md:w-80 left-0 top-0 sticky p-2 bg-slate-900 text-white z-50 flex flex-col gap-4 font-semibold">
+		<div class="flex justify-center items-center gap-3 mt-5 mb-10 p-4 rounded-md bg-white text-slate-900">
+			<img class="text-center w-10" src="/static/images/logo_1.svg"/>
+			<p class="hidden md:block text-center">
+				Dashboard
+			</p>
+		</div>
+		<ul class="w-full flex flex-col justify-start items-start gap-3">
 			for _, item := range navList {
-				<li
-					hx-get={ item.path }
-					hx-trigger="click"
-					hx-target="#layout"
-					hx-push-url="true"
-					class="flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer"
-				>
-					<i class={ item.icon }></i>
-					<p>
-						{ item.name }
-					</p>
-				</li>
+				if v == item.path {
+					<li
+						hx-get={ item.path }
+						hx-trigger="click"
+						hx-target="#layout"
+						hx-push-url="true"
+						class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md bg-white text-slate-900 cursor-pointer"
+					>
+						<i class={ item.icon }></i>
+						<p class="hidden md:block ">
+							{ item.name }
+						</p>
+					</li>
+				} else {
+					<li
+						hx-get={ item.path }
+						hx-trigger="click"
+						hx-target="#layout"
+						hx-push-url="true"
+						class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md text-white hover:bg-white hover:text-slate-900 hover:gap-4 cursor-pointer"
+					>
+						<i class={ item.icon }></i>
+						<p class="hidden md:block ">
+							{ item.name }
+						</p>
+					</li>
+				}
 			}
 		</ul>
 	</nav>

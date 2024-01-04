@@ -28,7 +28,6 @@ func main() {
 
 	// Routes
 	e.GET("/", mainHandler)
-	e.GET("/home", homeHandler)
 	e.GET("/users", usersHandler)
 	e.POST("/state", stateHandler)
 	e.POST("/add", addUserHandler)
@@ -40,12 +39,6 @@ func main() {
 // Main Page Handler
 func mainHandler(c echo.Context) error {
 	component := home.Main()
-	return component.Render(c.Request().Context(), c.Response())
-}
-
-// Home Page Handler
-func homeHandler(c echo.Context) error {
-	component := home.Home()
 	return component.Render(c.Request().Context(), c.Response())
 }
 

@@ -3,7 +3,7 @@ package home
 import "dashboard/src/view/layout"
 
 templ Main() {
-	@layout.Base() {
+	@layout.Base("/") {
 		<div
 			hx-target="this"
 			hx-swap="outerHTML"
