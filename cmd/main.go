@@ -3,13 +3,14 @@ package main
 import (
 	"dashboard/src/components/button"
 	"dashboard/src/view/home"
+	usersView "dashboard/src/view/users"
 	"fmt"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-var Usersx []home.User = []home.User{
+var Usersx []usersView.User = []usersView.User{
 	{Name: "Mahmoud", State: "Good"},
 	{Name: "Ahmed", State: "Good"},
 }
@@ -26,7 +27,9 @@ func main() {
 	e.Static("/static", "static")
 
 	// Routes
-	e.GET("/", homeHandler)
+	e.GET("/", mainHandler)
+	e.GET("/home", homeHandler)
+	e.GET("/users", usersHandler)
 	e.POST("/state", stateHandler)
 	e.POST("/add", addUserHandler)
 
@@ -34,21 +37,33 @@ func main() {
 	e.Start("localhost:3000")
 }
 
+// Main Page Handler
+func mainHandler(c echo.Context) error {
+	component := home.Main()
+	return component.Render(c.Request().Context(), c.Response())
+}
+
 // Home Page Handler
 func homeHandler(c echo.Context) error {
-	buttons := []home.Buttons{
+	component := home.Home()
+	return component.Render(c.Request().Context(), c.Response())
+}
+
+// Users Page Handler
+func usersHandler(c echo.Context) error {
+	buttons := []usersView.Buttons{
 		{Placeholder: "Good", Theme: button.Good},
 		{Placeholder: "Danger", Theme: button.Danger},
 		{Placeholder: "Warning", Theme: button.Warning},
 	}
-	component := home.Hello(Usersx, buttons)
+	component := usersView.UsersView(Usersx, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
 
 // State form handler
 func stateHandler(c echo.Context) error {
 	// Create an instance of the User struct
-	user := new(home.User)
+	user := new(usersView.User)
 
 	// Bind form data to the User struct
 	if err := c.Bind(user); err != nil {
@@ -56,19 +71,19 @@ func stateHandler(c echo.Context) error {
 	}
 
 	updateUserState(Usersx, user.Name, user.State)
-	buttons := []home.Buttons{
+	buttons := []usersView.Buttons{
 		{Placeholder: "Good", Theme: button.Good},
 		{Placeholder: "Danger", Theme: button.Danger},
 		{Placeholder: "Warning", Theme: button.Warning},
 	}
-	component := home.Card(user.Name, user.State, buttons)
+	component := usersView.Card(user.Name, user.State, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
 
 // State form handler
 func addUserHandler(c echo.Context) error {
 	// Create an instance of the User struct
-	var user home.User
+	var user usersView.User
 
 	// Bind form data to the User struct
 	if err := c.Bind(&user); err != nil {
@@ -76,18 +91,18 @@ func addUserHandler(c echo.Context) error {
 	}
 
 	Usersx = append(Usersx, user)
-	buttons := []home.Buttons{
+	buttons := []usersView.Buttons{
 		{Placeholder: "Good", Theme: button.Good},
 		{Placeholder: "Danger", Theme: button.Danger},
 		{Placeholder: "Warning", Theme: button.Warning},
 	}
 	// component := home.Card(user.Name, user.State, buttons)
 	// return component.Render(c.Request().Context(), c.Response())
-	component := home.UsersView(Usersx, buttons)
+	component := usersView.UsersView(Usersx, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
 
-func updateUserState(users []home.User, targetName string, newState string) ([]home.User, error) {
+func updateUserState(users []usersView.User, targetName string, newState string) ([]usersView.User, error) {
 	for i, user := range users {
 		if user.Name == targetName {
 			// Found the target user, update the state

@@ -1,0 +1,74 @@
+package usersView
+
+import "dashboard/src/components/button"
+
+type Buttons struct {
+	Placeholder string
+	Theme       string
+}
+
+type User struct {
+	Id    int
+	Name  string `form:"name"`
+	State string `form:"state"`
+}
+
+templ UsersView(users []User, details []Buttons) {
+	<div
+		hx-target="this"
+		hx-swap="outerHTML"
+		class="grid md:grid-cols-4 gap-2 p-4"
+	>
+		for _, u := range users {
+			@Card(u.Name, u.State, details)
+		}
+		<form
+			id="myForm2"
+			hx-post="/add"
+			hx-trigger="submit"
+			hx-swap="outerHTML"
+			class="p-2 flex flex-col gap-2 border justify-center items-center h-full rounded-md hover:shadow-md"
+		>
+			@button.AddUser()
+		</form>
+	</div>
+}
+
+templ StateForm(name string, details []Buttons) {
+	<form
+		id="myForm"
+		hx-post="/state"
+		hx-trigger="submit"
+		hx-swap="outerHTML"
+		class="self-center"
+	>
+		<div class="flex justify-center items-center gap-4 flex-wrap">
+			for _, d := range details {
+				@button.Button(name, d.Placeholder, d.Theme)
+			}
+		</div>
+	</form>
+}
+
+templ Card(name string, state string, details []Buttons) {
+	<div
+		id="card"
+		hx-target="this"
+		hx-swap="outerHTML"
+		hx-indicator="#indicator"
+		class="text-xl font-semibold p-2 flex flex-col justify-start items-start gap-4 border h-full rounded-md hover:shadow-md"
+	>
+		<div class="relative w-full">
+			<p id="indicator" class="htmx-indicator absolute w-full h-full flex justify-center items-center bg-white">
+				<span class="h-8 w-8 border-2 border-t-black animate-spin rounded-full"></span>
+			</p>
+			<p>
+				Hello, { name }
+			</p>
+			<p>
+				Status: { state }
+			</p>
+		</div>
+		@StateForm(name, details)
+	</div>
+}
