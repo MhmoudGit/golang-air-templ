@@ -1,36 +1,6 @@
 package layout
 
-templ Nav() {
-	<nav class="col-span-2 left-0 top-0 sticky p-2 bg-black text-white z-50 flex flex-col gap-4 font-semibold">
-		<h1 class="w-full text-center p-4 text-2xl">Logo / Title</h1>
-		<ul class="w-full flex flex-col justify-start items-start gap-3 p-4">
-			<li
-				hx-get="/"
-				hx-trigger="click"
-				hx-target="#layout"
-				hx-push-url="true"
-				class="flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer"
-			>
-				<i class="gg-home"></i>
-				<p>
-					Home
-				</p>
-			</li>
-			<li
-				hx-get="/users"
-				hx-trigger="click"
-				hx-target="#layout"
-				hx-push-url="true"
-				class="flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer"
-			>
-				<i class="gg-user-list"></i>
-				<p>
-					Users
-				</p>
-			</li>
-		</ul>
-	</nav>
-}
+import "dashboard/src/components/nav"
 
 templ Header() {
 	<div class="top-0 sticky p-2 flex justify-center items-center border-b bg-white z-50">
@@ -51,7 +21,7 @@ templ Base() {
 		</head>
 		<body>
 			<div class="grid grid-cols-10 h-screen w-full fixed" id="layout">
-				@Nav()
+				@nav.Nav()
 				<div class="col-span-8 overflow-y-auto overflow-x-auto">
 					@Header()
 					{ children... }
