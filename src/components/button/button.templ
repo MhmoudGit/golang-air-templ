@@ -8,3 +8,13 @@ templ Button(name string, placeholder string, theme string) {
 	<input type="hidden" name="name" value={ name }/>
 	<button type="submit" name="state" value={ placeholder } class={ theme, "p-1 px-4 rounded-md font-semibold" }>{ placeholder }</button>
 }
+
+templ AddUser() {
+	<input name="name" class=" shadow-md border border-b p-2 w-full outline-none"/>
+	<button
+		class="p-1 px-4 rounded-md font-semibold bg-slate-300 hover:bg-slate-200"
+		type="submit"
+		name="state"
+		value="Good"
+	>Add</button>
+}

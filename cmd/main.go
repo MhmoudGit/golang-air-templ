@@ -10,8 +10,8 @@ import (
 )
 
 var Usersx []home.User = []home.User{
-	{Id: 1, Name: "Mahmoud", State: "Good"},
-	{Id: 1, Name: "Ahmed", State: "Good"},
+	{Name: "Mahmoud", State: "Good"},
+	{Name: "Ahmed", State: "Good"},
 }
 
 func main() {
@@ -28,6 +28,7 @@ func main() {
 	// Routes
 	e.GET("/", homeHandler)
 	e.POST("/state", stateHandler)
+	e.POST("/add", addUserHandler)
 
 	// Starting echo server
 	e.Start("localhost:3000")
@@ -61,6 +62,28 @@ func stateHandler(c echo.Context) error {
 		{Placeholder: "Warning", Theme: button.Warning},
 	}
 	component := home.Card(user.Name, user.State, buttons)
+	return component.Render(c.Request().Context(), c.Response())
+}
+
+// State form handler
+func addUserHandler(c echo.Context) error {
+	// Create an instance of the User struct
+	var user home.User
+
+	// Bind form data to the User struct
+	if err := c.Bind(&user); err != nil {
+		return err
+	}
+
+	Usersx = append(Usersx, user)
+	buttons := []home.Buttons{
+		{Placeholder: "Good", Theme: button.Good},
+		{Placeholder: "Danger", Theme: button.Danger},
+		{Placeholder: "Warning", Theme: button.Warning},
+	}
+	// component := home.Card(user.Name, user.State, buttons)
+	// return component.Render(c.Request().Context(), c.Response())
+	component := home.UsersView(Usersx, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
 
