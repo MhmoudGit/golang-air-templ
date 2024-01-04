@@ -68,8 +68,8 @@ templ Card(name string, state string, details []Buttons) {
 		class="text-xl font-semibold p-2 flex flex-col justify-start items-start gap-4 border h-full rounded-md hover:shadow-md"
 	>
 		<div class="relative w-full">
-			<p id="indicator" class="htmx-indicator absolute w-full h-full flex justify-center items-center bg-white backdrop-blur-lg">
-				Loading...
+			<p id="indicator" class="htmx-indicator absolute w-full h-full flex justify-center items-center bg-white">
+				<span class="h-8 w-8 border-2 border-t-black animate-spin rounded-full"></span>
 			</p>
 			<p>
 				Hello, { name }
