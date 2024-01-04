@@ -98,7 +98,7 @@ func addUserHandler(c echo.Context) error {
 	}
 	// component := home.Card(user.Name, user.State, buttons)
 	// return component.Render(c.Request().Context(), c.Response())
-	component := usersView.UsersView(Usersx, buttons)
+	component := usersView.UsersData(Usersx, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
 

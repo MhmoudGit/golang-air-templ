@@ -32,7 +32,7 @@ func Nav() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul class=\"w-full flex flex-col justify-start items-start gap-3 p-4\"><li hx-get=\"/home\" hx-trigger=\"click\" hx-target=\"#home\" class=\"flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer\"><i class=\"gg-home\"></i><p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul class=\"w-full flex flex-col justify-start items-start gap-3 p-4\"><li hx-get=\"/\" hx-trigger=\"click\" hx-target=\"#layout\" hx-push-url=\"true\" class=\"flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer\"><i class=\"gg-home\"></i><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -41,7 +41,7 @@ func Nav() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></li><li hx-get=\"/users\" hx-trigger=\"click\" hx-target=\"#home\" class=\"flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer\"><i class=\"gg-user-list\"></i><p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></li><li hx-get=\"/users\" hx-trigger=\"click\" hx-target=\"#layout\" hx-push-url=\"true\" class=\"flex justify-center items-center w-full gap-2 bg-white rounded-md text-black p-2 hover:bg-cyan-50 hover:gap-4 cursor-pointer\"><i class=\"gg-user-list\"></i><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -125,7 +125,7 @@ func Base() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title></head><body><div class=\"grid grid-cols-10 h-screen w-full fixed\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title></head><body><div class=\"grid grid-cols-10 h-screen w-full fixed\" id=\"layout\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
