@@ -8,7 +8,7 @@ templ Header() {
 	</div>
 }
 
-var logged string = "logged"
+var logged string = "loggedin"
 
 templ Base(v string) {
 	<html lang="en">
@@ -22,21 +22,13 @@ templ Base(v string) {
 			<title>Golang Templ</title>
 		</head>
 		<body>
-			if logged == "loggedin" {
-				@Layout(v)
-			} else {
-				Please log in
-			}
+			<div class="flex h-screen w-full fixed" id="layout">
+				@nav.Nav(v)
+				<div class="w-full overflow-y-auto overflow-x-auto">
+					@Header()
+					{ children... }
+				</div>
+			</div>
 		</body>
 	</html>
-}
-
-templ Layout(v string) {
-	<div class="flex h-screen w-full fixed" id="layout">
-		@nav.Nav(v)
-		<div class="w-full overflow-y-auto overflow-x-auto">
-			@Header()
-			{ children... }
-		</div>
-	</div>
 }
