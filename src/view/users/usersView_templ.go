@@ -160,7 +160,7 @@ func Card(name string, state string, details []Buttons) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"card\" hx-target=\"this\" hx-swap=\"outerHTML\" hx-indicator=\"#indicator\" class=\"text-xl font-semibold p-2 flex flex-col justify-start items-start gap-4 border h-full rounded-md hover:shadow-md\"><div class=\"relative w-full\"><p id=\"indicator\" class=\"htmx-indicator absolute w-full h-full flex justify-center items-center bg-white\"><span class=\"h-8 w-8 border-2 border-t-black animate-spin rounded-full\"></span></p><p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"card\" hx-target=\"this\" hx-swap=\"outerHTML\" hx-indicator=\"#indicator\" class=\"text-xl font-semibold p-2 flex flex-col justify-start items-start gap-4 border h-full rounded-md hover:shadow-md\"><div class=\"relative w-full\"><p id=\"indicator\" class=\"htmx-indicator absolute w-full h-full flex justify-center items-center bg-slate-100 \"><span class=\"h-8 w-8 border-2 border-t-black animate-spin rounded-full \"></span></p><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

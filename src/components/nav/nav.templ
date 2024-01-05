@@ -12,15 +12,15 @@ var navList []NavItem = []NavItem{
 }
 
 templ Nav(v string) {
-	<nav class="w-fit md:w-80 left-0 top-0 sticky p-2 bg-slate-900 text-white z-50 flex flex-col gap-4 font-semibold">
-		<div class="flex justify-center items-center gap-3 mt-5 mb-10 p-4 rounded-md bg-white text-slate-900">
+	<nav class="w-fit md:w-[200px] left-0 top-0 sticky p-2 bg-white text-rose-500 z-50 flex flex-col gap-4 border-r-2">
+		<div class="flex flex-col justify-center items-center gap-3 mt-5 mb-10 p-4 rounded-md">
 			<img class="text-center w-10" src="/static/images/logo_1.svg"/>
-			<p class="hidden md:block text-center">
+			<p class="hidden md:block text-center text-rose-500 font-semibold">
 				Dashboard
 			</p>
 		</div>
 		<div class="h-full flex flex-col justify-between">
-			<ul class="w-full flex flex-col justify-start items-start gap-3">
+			<ul class="w-full flex flex-col justify-start items-start gap-3 text-sm">
 				for _, item := range navList {
 					if v == item.path {
 						<li
@@ -28,7 +28,7 @@ templ Nav(v string) {
 							hx-trigger="click"
 							hx-target="#layout"
 							hx-push-url="true"
-							class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md bg-white text-slate-900 cursor-pointer"
+							class="flex justify-center md:justify-start items-center w-full gap-4 p-4  rounded-md text-rose-500 cursor-pointer"
 						>
 							<i class={ item.icon }></i>
 							<p class="hidden md:block ">
@@ -41,7 +41,7 @@ templ Nav(v string) {
 							hx-trigger="click"
 							hx-target="#layout"
 							hx-push-url="true"
-							class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md text-white hover:bg-white hover:text-slate-900 hover:gap-4 cursor-pointer"
+							class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md text-slate-800  hover:text-rose-500  hover:gap-4 cursor-pointer"
 						>
 							<i class={ item.icon }></i>
 							<p class="hidden md:block ">

@@ -3,8 +3,8 @@ package layout
 import "dashboard/src/components/nav"
 
 templ Header() {
-	<div class="top-0 sticky p-2 flex justify-center items-center border-b bg-white z-50">
-		<h1 class="font-semibold text-cyan-600">This is from the Base layout (Header)</h1>
+	<div class="top-0 sticky p-2 flex justify-center items-center border-b-2 bg-white z-50">
+		<h1 class="font-semibold text-rose-500">This is from the Base layout (Header)</h1>
 	</div>
 }
 
@@ -19,7 +19,7 @@ templ Base(v string, login string) {
 			<link href="https://unpkg.com/css.gg@2.0.0/icons/css/user-list.css" rel="stylesheet"/>
 			<title>Golang Templ</title>
 		</head>
-		<body>
+		<body class="bg-slate-100 font-mono">
 			if login == "on" {
 				<div class="flex h-screen w-full fixed" id="layout">
 					@nav.Nav(v)
