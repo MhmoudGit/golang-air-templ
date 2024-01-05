@@ -38,7 +38,7 @@ func main() {
 
 // Main Page Handler
 func mainHandler(c echo.Context) error {
-	component := home.Main()
+	component := home.Home()
 	return component.Render(c.Request().Context(), c.Response())
 }
 
