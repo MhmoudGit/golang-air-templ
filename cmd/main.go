@@ -3,6 +3,7 @@ package main
 import (
 	"dashboard/src/components/button"
 	"dashboard/src/view/home"
+	"dashboard/src/view/layout"
 	usersView "dashboard/src/view/users"
 	"fmt"
 
@@ -14,6 +15,8 @@ var Usersx []usersView.User = []usersView.User{
 	{Name: "Mahmoud", State: "Good"},
 	{Name: "Ahmed", State: "Good"},
 }
+
+var logged string = "off"
 
 func main() {
 	// Creating new instance of echo
@@ -28,6 +31,9 @@ func main() {
 
 	// Routes
 	e.GET("/", mainHandler)
+	e.GET("/home", homeHandler)
+	e.GET("/login", loginHandler)
+	e.GET("/logout", logoutHandler)
 	e.GET("/users", usersHandler)
 	e.POST("/state", stateHandler)
 	e.POST("/add", addUserHandler)
@@ -36,9 +42,28 @@ func main() {
 	e.Start("localhost:3000")
 }
 
+func loginHandler(c echo.Context) error {
+	logged = "on"
+	return c.Redirect(302, "/")
+}
+
+func logoutHandler(c echo.Context) error {
+	logged = "off"
+	return c.Redirect(302, "/")
+}
+
 // Main Page Handler
 func mainHandler(c echo.Context) error {
-	component := home.Home()
+	if logged == "on" {
+		return c.Redirect(302, "/home")
+	}
+	component := layout.Base("/", logged)
+	return component.Render(c.Request().Context(), c.Response())
+}
+
+// Main Page Handler
+func homeHandler(c echo.Context) error {
+	component := home.Home(logged)
 	return component.Render(c.Request().Context(), c.Response())
 }
 
@@ -49,7 +74,7 @@ func usersHandler(c echo.Context) error {
 		{Placeholder: "Danger", Theme: button.Danger},
 		{Placeholder: "Warning", Theme: button.Warning},
 	}
-	component := usersView.UsersView(Usersx, buttons)
+	component := usersView.UsersView(Usersx, buttons, logged)
 	return component.Render(c.Request().Context(), c.Response())
 }
 

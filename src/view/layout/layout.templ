@@ -8,9 +8,7 @@ templ Header() {
 	</div>
 }
 
-var logged string = "loggedin"
-
-templ Base(v string) {
+templ Base(v string, login string) {
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
@@ -22,13 +20,19 @@ templ Base(v string) {
 			<title>Golang Templ</title>
 		</head>
 		<body>
-			<div class="flex h-screen w-full fixed" id="layout">
-				@nav.Nav(v)
-				<div class="w-full overflow-y-auto overflow-x-auto">
-					@Header()
-					{ children... }
+			if login == "on" {
+				<div class="flex h-screen w-full fixed" id="layout">
+					@nav.Nav(v)
+					<div class="w-full overflow-y-auto overflow-x-auto">
+						@Header()
+						{ children... }
+					</div>
 				</div>
-			</div>
+			} else {
+				<div class="flex justify-center items-center h-full w-full">
+					<a href="/login" hx-swap="outerHTML" type="button" class="px-10 py-2 rounded-md bg-green-500 hover:bg-green-400 text-white font-semibold">Login</a>
+				</div>
+			}
 		</body>
 	</html>
 }

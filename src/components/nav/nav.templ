@@ -7,7 +7,7 @@ type NavItem struct {
 }
 
 var navList []NavItem = []NavItem{
-	{name: "Home", path: "/", icon: "gg-home"},
+	{name: "Home", path: "/home", icon: "gg-home"},
 	{name: "Users", path: "/users", icon: "gg-user-list"},
 }
 
@@ -19,36 +19,39 @@ templ Nav(v string) {
 				Dashboard
 			</p>
 		</div>
-		<ul class="w-full flex flex-col justify-start items-start gap-3">
-			for _, item := range navList {
-				if v == item.path {
-					<li
-						hx-get={ item.path }
-						hx-trigger="click"
-						hx-target="#layout"
-						hx-push-url="true"
-						class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md bg-white text-slate-900 cursor-pointer"
-					>
-						<i class={ item.icon }></i>
-						<p class="hidden md:block ">
-							{ item.name }
-						</p>
-					</li>
-				} else {
-					<li
-						hx-get={ item.path }
-						hx-trigger="click"
-						hx-target="#layout"
-						hx-push-url="true"
-						class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md text-white hover:bg-white hover:text-slate-900 hover:gap-4 cursor-pointer"
-					>
-						<i class={ item.icon }></i>
-						<p class="hidden md:block ">
-							{ item.name }
-						</p>
-					</li>
+		<div class="h-full flex flex-col justify-between">
+			<ul class="w-full flex flex-col justify-start items-start gap-3">
+				for _, item := range navList {
+					if v == item.path {
+						<li
+							hx-get={ item.path }
+							hx-trigger="click"
+							hx-target="#layout"
+							hx-push-url="true"
+							class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md bg-white text-slate-900 cursor-pointer"
+						>
+							<i class={ item.icon }></i>
+							<p class="hidden md:block ">
+								{ item.name }
+							</p>
+						</li>
+					} else {
+						<li
+							hx-get={ item.path }
+							hx-trigger="click"
+							hx-target="#layout"
+							hx-push-url="true"
+							class="flex justify-center md:justify-start items-center w-full gap-2 p-4  rounded-md text-white hover:bg-white hover:text-slate-900 hover:gap-4 cursor-pointer"
+						>
+							<i class={ item.icon }></i>
+							<p class="hidden md:block ">
+								{ item.name }
+							</p>
+						</li>
+					}
 				}
-			}
-		</ul>
+			</ul>
+			<a href="/logout" class="px-10 py-2 rounded-md bg-red-500 hover:bg-red-400 text-white font-semibold text-center justify-self-end">Log Out</a>
+		</div>
 	</nav>
 }

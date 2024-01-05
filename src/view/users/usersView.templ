@@ -14,8 +14,8 @@ type User struct {
 	State string `form:"state"`
 }
 
-templ UsersView(users []User, details []Buttons) {
-	@layout.Base("/users") {
+templ UsersView(users []User, details []Buttons, login string) {
+	@layout.Base("/users", login) {
 		<div>
 			@UsersData(users, details)
 		</div>

@@ -2,8 +2,8 @@ package home
 
 import "dashboard/src/view/layout"
 
-templ Home() {
-	@layout.Base("/") {
+templ Home(login string) {
+	@layout.Base("/home", login) {
 		<div
 			hx-target="this"
 			hx-swap="outerHTML"
