@@ -19,6 +19,7 @@ type NavItem struct {
 var navList []NavItem = []NavItem{
 	{name: "Home", path: "/home", icon: "gg-home"},
 	{name: "Users", path: "/users", icon: "gg-user-list"},
+	{name: "Tables", path: "/tables", icon: "gg-user-list"},
 }
 
 func Nav(v string) templ.Component {
@@ -81,7 +82,7 @@ func Nav(v string) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\components\nav\nav.templ`, Line: 34, Col: 19}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\components\nav\nav.templ`, Line: 35, Col: 19}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -124,7 +125,7 @@ func Nav(v string) templ.Component {
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\components\nav\nav.templ`, Line: 47, Col: 19}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `src\components\nav\nav.templ`, Line: 48, Col: 19}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {

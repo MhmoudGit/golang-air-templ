@@ -16,6 +16,12 @@ var Usersx []usersView.User = []usersView.User{
 	{Name: "Ahmed", State: "Good"},
 }
 
+var buttons []usersView.Buttons = []usersView.Buttons{
+	{Placeholder: "Good", Theme: button.Good},
+	{Placeholder: "Danger", Theme: button.Danger},
+	{Placeholder: "Warning", Theme: button.Warning},
+}
+
 var logged string = "off"
 
 func main() {
@@ -35,6 +41,7 @@ func main() {
 	e.GET("/login", loginHandler)
 	e.GET("/logout", logoutHandler)
 	e.GET("/users", usersHandler)
+	e.GET("/tables", usersHandler)
 	e.POST("/state", stateHandler)
 	e.POST("/add", addUserHandler)
 
@@ -69,11 +76,7 @@ func homeHandler(c echo.Context) error {
 
 // Users Page Handler
 func usersHandler(c echo.Context) error {
-	buttons := []usersView.Buttons{
-		{Placeholder: "Good", Theme: button.Good},
-		{Placeholder: "Danger", Theme: button.Danger},
-		{Placeholder: "Warning", Theme: button.Warning},
-	}
+
 	component := usersView.UsersView(Usersx, buttons, logged)
 	return component.Render(c.Request().Context(), c.Response())
 }
@@ -89,11 +92,7 @@ func stateHandler(c echo.Context) error {
 	}
 
 	updateUserState(Usersx, user.Name, user.State)
-	buttons := []usersView.Buttons{
-		{Placeholder: "Good", Theme: button.Good},
-		{Placeholder: "Danger", Theme: button.Danger},
-		{Placeholder: "Warning", Theme: button.Warning},
-	}
+
 	component := usersView.Card(user.Name, user.State, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
@@ -109,13 +108,7 @@ func addUserHandler(c echo.Context) error {
 	}
 
 	Usersx = append(Usersx, user)
-	buttons := []usersView.Buttons{
-		{Placeholder: "Good", Theme: button.Good},
-		{Placeholder: "Danger", Theme: button.Danger},
-		{Placeholder: "Warning", Theme: button.Warning},
-	}
-	// component := home.Card(user.Name, user.State, buttons)
-	// return component.Render(c.Request().Context(), c.Response())
+
 	component := usersView.UsersData(Usersx, buttons)
 	return component.Render(c.Request().Context(), c.Response())
 }
